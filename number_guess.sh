@@ -22,7 +22,7 @@ GAME
 
 GAME(){
   RANDOM_NUMBER="$(( RANDOM%1000 + 1 ))"
-  GUESSES=0
+  GUESSES=1
   echo $RANDOM_NUMBER
   echo -e "\nGuess the secret number between 1 and 1000:"
   until [[ $GUESSED_NUMBER -eq RANDOM_NUMBER ]]
@@ -33,12 +33,15 @@ GAME(){
       echo -e "\nThat is not an integer, guess again:"
       read GUESSED_NUMBER
     done
-    (( GUESSES++ ))
+    
     if [[ $GUESSED_NUMBER > $RANDOM_NUMBER ]]
     then
       echo -e "\nIt's lower than that, guess again:"
-    else
+      (( GUESSES++ ))
+    elif [[ $GUESSED_NUMBER < $RANDOM_NUMBER ]]
+    then
       echo -e "\nIt's higher than that, guess again:"
+      (( GUESSES++ ))
     fi
   done
   INSERT
