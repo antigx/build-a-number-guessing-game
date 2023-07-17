@@ -28,6 +28,11 @@ GAME(){
   until [[ $GUESSED_NUMBER -eq RANDOM_NUMBER ]]
   do
     read GUESSED_NUMBER
+    while [[ ! $GUESSED_NUMBER =~ ^[0-9]+$ ]]
+    do
+      echo -e "\nThat is not an integer, guess again:"
+      read GUESSED_NUMBER
+    done
     (( GUESSES++ ))
     if [[ $GUESSED_NUMBER > $RANDOM_NUMBER ]]
     then
